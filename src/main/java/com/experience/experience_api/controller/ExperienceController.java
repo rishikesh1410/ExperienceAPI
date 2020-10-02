@@ -1,6 +1,7 @@
 package com.experience.experience_api.controller;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,19 @@ public class ExperienceController {
 	@Autowired
 	private ExperienceRepository expRepo;
 
+	// TODO : Currently only one user, later authentication part will be added
+	private final Integer USER_ID = 5;
+
 	@GetMapping("/")
-	public String startingPoint() {
-		return "Coming soon";
+	public ResponseEntity<Object> getDashboard(@RequestBody(required = false) List<String> tags) {
+
+		List<Experience> exps = null;
+		if (tags == null) {
+			exps = expRepo.findByUserId(USER_ID);
+		} else {
+			exps = expRepo.findByTags(tags);
+		}
+		return ResponseEntity.ok(exps);
 	}
 
 	@GetMapping("/getExp/{id}")
