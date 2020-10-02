@@ -26,6 +26,9 @@ Collection (name = 'experiences')
    
  4. Description : Delete a Experience <br />
    URI : /api/v1/deleteExp/{id} <br />
+ 
+ 5. Description : Common API for retrieving all experiences <br />
+    URI : /api/v1/ <br />
 
 
 Full API Specifications : https://docs.google.com/document/d/14q7EbG5-XmlIEFWf502l9z0o7lkc7J50nEqGO_pynf0/edit
