@@ -11,7 +11,7 @@ Collection (name = 'experiences')
 3. subject (string)
 4. description (string)
 5. tags (array of strings)
-6. links (array of strings)
+6. link
 
 # API Specification
 
