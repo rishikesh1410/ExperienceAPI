@@ -11,6 +11,6 @@ public interface ExperienceRepository extends MongoRepository<Experience, String
 
 	Optional<Experience> findById(String id);
 
-	@Query("{ 'tags' : {'$in' : ?0} }")
-	List<Experience> findByTags(List<String> tags);
+	@Query("{ 'tags' : {'$in' : ?0} , 'subject' : {'$regex' : ?1, '$options' : 'i' }}")
+	List<Experience> findByTags(List<String> tags, String regexString);
 }

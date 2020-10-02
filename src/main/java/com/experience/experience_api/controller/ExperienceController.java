@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.experience.experience_api.repository.Experience;
@@ -29,13 +30,15 @@ public class ExperienceController {
 	private final Integer USER_ID = 5;
 
 	@GetMapping("/")
-	public ResponseEntity<Object> getDashboard(@RequestBody(required = false) List<String> tags) {
+	public ResponseEntity<Object> getDashboard(@RequestBody(required = false) List<String> tags,
+			@RequestParam(required = false) String subject) {
 
 		List<Experience> exps = null;
+		System.out.println(subject);
 		if (tags == null) {
 			exps = expRepo.findByUserId(USER_ID);
 		} else {
-			exps = expRepo.findByTags(tags);
+			exps = expRepo.findByTags(tags, ".*" + subject + ".*");
 		}
 		return ResponseEntity.ok(exps);
 	}
