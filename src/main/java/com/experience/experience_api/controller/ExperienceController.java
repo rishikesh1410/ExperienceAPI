@@ -34,11 +34,11 @@ public class ExperienceController {
 			@RequestParam(required = false) String subject) {
 
 		List<Experience> exps = null;
-		System.out.println(subject);
+		String subString = (subject != null) ? subject : "";
 		if (tags == null) {
-			exps = expRepo.findByUserId(USER_ID);
+			exps = expRepo.findBySubject(".*" + subString + ".*", USER_ID);
 		} else {
-			exps = expRepo.findByTags(tags, ".*" + subject + ".*");
+			exps = expRepo.findByTagsAndSubject(tags, ".*" + subString + ".*", USER_ID);
 		}
 		return ResponseEntity.ok(exps);
 	}
